@@ -1,9 +1,18 @@
 ### 目录
 - <a href="#sort">排序</a>
+  -   <a href="#sort1">冒泡排序</a>
+  -   <a href="#sort2">选择排序</a>
+  -   <a href="#sort3">插入排序</a>
+  -   <a href="#sort4">合并排序</a>
+  -   <a href="#sort5">快速排序</a>
+- <a href="#binaryTree">二叉树</a>
+- <a href="#depthTraver">深度优先遍历</a>
+- <a href="#dreadthTraver">广度优先遍历</a>
 - <a href="#maxSum">求数组最大连续子集和</a>
+- <a href="#arrToTree">list转成树结构</a>
 
 ### <a name="sort">排序</a>
-1.冒泡排序
+1.<a name="sort1">冒泡排序</a>
 ```javascript
 const bubbleSort = (arr=[]) => {
     let len = arr.length;
@@ -24,7 +33,7 @@ const bubbleSort = (arr=[]) => {
 let bubbleSortResult = bubbleSort([3,5,1,4,2,7,6,9,8,12,11,13]);
 console.log('bubbleSortResult==>', bubbleSortResult);
 ```
-2.选择排序
+2.<a name="sort2">选择排序</a>
 ```javascript
 const selectionSort = (arr=[]) => {
     let len = arr.length;
@@ -50,7 +59,7 @@ const selectionSort = (arr=[]) => {
 let selectionSortResult = selectionSort([3,5,1,4,2,7,6,9,8,12,11,13]);
 console.log('selectionSortResult==>', selectionSortResult);
 ```
-3.插入排序
+3.<a name="sort3">插入排序</a>
 ```javascript
 const insertionSort = (arr=[]) => {
     let len = arr.length;
@@ -69,7 +78,7 @@ const insertionSort = (arr=[]) => {
 let insertionSortResult = insertionSort([3,5,1,4,2,7,6,9,8,12,11,13]);
 console.log('insertionSortResult==>', insertionSortResult);
 ```
-4.合并排序
+4.<a name="sort4">合并排序</a>
 ```javascript
 function merge(left, right){
     let result  = [],
@@ -100,7 +109,7 @@ function mergeSort(myArray){
 let mergeSortResult = mergeSort([3,5,1]);
 console.log('mergeSortResult==>', mergeSortResult);
 ```
-5.快速排序
+5.<a name="sort5">快速排序</a>
 ```javascript
 const quickSort = (arr=[]) => {
     let len = arr.length;
@@ -119,6 +128,139 @@ const quickSort = (arr=[]) => {
 };
 let quickSortResult = quickSort([3,5,1]);
 console.log('quickSortResult==>', quickSortResult);
+```
+### <a name="binaryTree">二叉树</a>
+```javascript
+function BinaryTree() {
+    let root = null;
+
+    function Node(key) {
+        this.key = key;
+        this.left = null;
+        this.right = null;
+    }
+
+    function insertNode(node, newNode) {
+        if (newNode.key < node) {
+            if (node.left === null) {
+                node.left = newNode
+            } else {
+                insertNode(node.left, newNode)
+            }
+        } else {
+            if (node.right === null) {
+                node.right = newNode
+            } else {
+                insertNode(node.right, newNode)
+            }
+        }
+    }
+
+    // 生成二叉树
+    this.insert = function (key) {
+        let newNode = new Node(key);
+        if (root === null) {
+            root = newNode
+        } else {
+            insertNode(root, newNode)
+        }
+    };
+
+    // 二叉树-前序遍历（复制二叉树）
+    function preOrderTravelNode(root, callback) {
+        if (root !== null) {
+            callback(root.key);
+            preOrderTravelNode(root.left, callback);
+            preOrderTravelNode(root.right, callback);
+        }
+    }
+
+    this.preOrderTravel = function (callback) {
+        preOrderTravelNode(root, callback)
+    };
+
+    // 二叉树-中序遍历（从小到大顺序遍历出来）
+    function midOrderTravelNode(root, callback) {
+        if (root !== null) {
+            midOrderTravelNode(root.left, callback);
+            callback(root.key);
+            midOrderTravelNode(root.right, callback);
+        }
+    }
+
+    this.midOrderTravel = function (callback) {
+        midOrderTravelNode(root, callback)
+    };
+
+    // 二叉树-后续序遍历（系统文件遍历）
+    function lastOrderTravelNode(root, callback) {
+        if (root !== null) {
+            lastOrderTravelNode(root.left, callback);
+            lastOrderTravelNode(root.right, callback);
+            callback(root.key);
+        }
+    }
+
+    this.lastOrderTravel = function (callback) {
+        lastOrderTravelNode(root, callback)
+    };
+
+    this.show = function () {
+        console.log('root==>', root)
+    }
+}
+
+let BinaryTreeArr = [6, 3, 2, 4, 5];
+let BinaryTreeObj = new BinaryTree();
+BinaryTreeArr.forEach(item => {
+    BinaryTreeObj.insert(item)
+});
+BinaryTreeObj.show();
+BinaryTreeObj.preOrderTravel(function (key) {
+    console.log('preOrderTravel==>', key)
+});
+BinaryTreeObj.midOrderTravel(function (key) {
+    console.log('midOrderTravel==>', key)
+});
+BinaryTreeObj.lastOrderTravel(function (key) {
+    console.log('lastOrderTravel==>', key)
+});
+```
+### <a name="depthTraver">深度优先遍历</a>
+```javascript
+const DepthTraver = (node, nodeList = []) => {
+    if (node != null) {
+        nodeList.push(node);
+        let children = node.children;
+        for (let i = 0; i < children.length; i++) {
+            DepthTraver(children[i], nodeList)
+        }
+    }
+    return nodeList
+};
+let DepthNodeList = DepthTraver(document.getElementById('box'));
+console.log('DepthNodeList==>', DepthNodeList);
+```
+### <a name="dreadthTraver">广度优先遍历</a>
+```javascript
+const BreadthTraver = (node) => {
+    let nodeList = [];
+    let stack = [];
+    if(node != null) {
+        stack.push(node);
+        while (stack.length) {
+            let item = stack.shift();
+            let children = item.children;
+            nodeList.push(item);
+            for(let i=0; i<children.length; i++) {
+                stack.push(children[i])
+            }
+        }
+    }
+    return nodeList;
+};
+let BreadthNodeList = BreadthTraver(document.getElementById('box'));
+console.log('BreadthNodeList==>', BreadthNodeList);
 ```
 ### <a name="maxSum">求数组最大连续子集和</a>
 ```javascript
@@ -144,4 +286,43 @@ const maxSum = (arr=[]) => {
 };
 let maxSumResult = maxSum([0,1,-3,4,7]);
 console.log('maxSumResult==>', maxSumResult);
+```
+### <a name="arrToTree">把原始 list 转换成树形结构，parentId 为多少就挂载在该 id 的属性 children 数组下</a>
+```javascript
+let list =[
+    {id:3,name:'部门C',parentId:1},
+    {id:5,name:'部门E',parentId:2},
+    {id:1,name:'部门A',parentId:0},
+    {id:2,name:'部门B',parentId:0},
+    {id:8,name:'部门H',parentId:4},
+    {id:7,name:'部门G',parentId:2},
+    {id:4,name:'部门D',parentId:1},
+    {id:6,name:'部门F',parentId:3}
+];
+function convert(list) {
+    const res = [];
+
+    const map = list.reduce((pre, cur) => {
+        pre[cur.id] = cur;
+        return pre
+    }, {});
+
+    for (const item of list) {
+        if (item.parentId === 0) {
+            res.push(item);
+            continue
+        }
+        if (item.parentId in map) {
+            const parent = map[item.parentId];
+            parent.children = parent.children || [];
+            parent.children.push(item)
+        }
+    }
+    console.log('list==>', list);
+    console.log('map==>', map);
+    return res
+}
+
+let newList = convert(list);
+console.log('newList==>', newList);
 ```
