@@ -1,5 +1,9 @@
-### 排序
-冒泡排序
+### 目录
+- <a href="#sort">排序</a>
+- <a href="#maxSum">求数组最大连续子集和</a>
+
+### <a name="sort">排序</a>
+1.冒泡排序
 ```javascript
 const bubbleSort = (arr=[]) => {
     let len = arr.length;
@@ -20,7 +24,7 @@ const bubbleSort = (arr=[]) => {
 let bubbleSortResult = bubbleSort([3,5,1,4,2,7,6,9,8,12,11,13]);
 console.log('bubbleSortResult==>', bubbleSortResult);
 ```
-选择排序
+2.选择排序
 ```javascript
 const selectionSort = (arr=[]) => {
     let len = arr.length;
@@ -46,7 +50,7 @@ const selectionSort = (arr=[]) => {
 let selectionSortResult = selectionSort([3,5,1,4,2,7,6,9,8,12,11,13]);
 console.log('selectionSortResult==>', selectionSortResult);
 ```
-插入排序
+3.插入排序
 ```javascript
 const insertionSort = (arr=[]) => {
     let len = arr.length;
@@ -65,7 +69,7 @@ const insertionSort = (arr=[]) => {
 let insertionSortResult = insertionSort([3,5,1,4,2,7,6,9,8,12,11,13]);
 console.log('insertionSortResult==>', insertionSortResult);
 ```
-合并排序
+4.合并排序
 ```javascript
 function merge(left, right){
     let result  = [],
@@ -96,7 +100,7 @@ function mergeSort(myArray){
 let mergeSortResult = mergeSort([3,5,1]);
 console.log('mergeSortResult==>', mergeSortResult);
 ```
-快速排序
+5.快速排序
 ```javascript
 const quickSort = (arr=[]) => {
     let len = arr.length;
@@ -115,4 +119,29 @@ const quickSort = (arr=[]) => {
 };
 let quickSortResult = quickSort([3,5,1]);
 console.log('quickSortResult==>', quickSortResult);
+```
+### <a name="maxSum">求数组最大连续子集和</a>
+```javascript
+const maxSum = (arr=[]) => {
+    let max = 0;
+    let maxStartIndex = 0;
+    let maxEndIndex = 0;
+    for(let i=0; i<arr.length; i++) {
+        let sum = 0;
+        for(let j=i; j<arr.length; j++) {
+            sum+=arr[j];
+            if(sum>max) {
+                max=sum;
+                maxStartIndex = i;
+                maxEndIndex = j
+            }
+        }
+    }
+    return {
+        max: max,
+        maxArr: arr.slice(maxStartIndex, maxEndIndex+1)
+    }
+};
+let maxSumResult = maxSum([0,1,-3,4,7]);
+console.log('maxSumResult==>', maxSumResult);
 ```
