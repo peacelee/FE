@@ -5,4 +5,4 @@ ECMAScript
 - <a href="#this">this指向</a>
 
 ### <a name="prototype">继承</a>
-### <a name="this">继承</a>
+### <a name="this">this指向</a>
