@@ -12,6 +12,7 @@
 - <a href="#dreadthTraver">广度优先遍历</a>
 - <a href="#maxSum">求数组最大连续子集和</a>
 - <a href="#arrToTree">list转成树结构</a>
+- <a href="#deepCopy">深度拷贝</a>
 
 ### <a name="sort">排序</a>
 1.<a name="sort1">冒泡排序</a>
@@ -327,4 +328,47 @@ function convert(list) {
 
 let newList = convert(list);
 console.log('newList==>', newList);
+```
+### <a name="deepCopy">深度拷贝</a>
+```javascript
+function deepCopy (obj, cache = []) {
+    // just return if obj is immutable value
+    if (obj === null || typeof obj !== 'object') {
+        return obj
+    }
+
+    // if obj is hit, it is in circular structure
+    const hit = cache.find(c => c.original === obj);
+    if (hit) {
+        return hit.copy
+    }
+
+    const copy = Array.isArray(obj) ? [] : {};
+    // put the copy into cache at first
+    // because we want to refer it in recursive deepCopy
+    cache.push({
+        original: obj,
+        copy
+    });
+
+    Object.keys(obj).forEach(key => {
+        copy[key] = deepCopy(obj[key], cache)
+    });
+
+    return copy
+}
+
+var copyObj = deepCopy({
+    a: 1,
+    b: function() {
+      
+    },
+    c: {name: 1},
+    d: null,
+    e: [1,2,3],
+    f: true,
+    g: 'abc',
+    h: undefined
+});
+console.log('copyObj==>', copyObj);
 ```
