@@ -12,7 +12,7 @@
 - <a href="#dreadthTraver">广度优先遍历</a>
 - <a href="#maxSum">求数组最大连续子集和</a>
 - <a href="#arrToTree">list转成树结构</a>
-- <a href="#deepCopy">深度拷贝</a>
+- <a href="https://github.com/peacelee/FE/issues/1">深度拷贝</a>
 
 ### <a name="sort">排序</a>
 1.<a name="sort1">冒泡排序</a>
