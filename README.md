@@ -1,13 +1,12 @@
 目录
 ---
 #### CSS
----
+
 #### JavaScript
----
+
 #### 浏览器
----
+
 #### 算法
----
 1. <a href="https://github.com/peacelee/FE/issues/7">排序</a>
 2. <a href="https://github.com/peacelee/FE/issues/6">二叉树</a>
 3. <a href="https://github.com/peacelee/FE/issues/5">深度优先遍历</a>
