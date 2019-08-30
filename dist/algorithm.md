@@ -1,4 +1,4 @@
-算法 
+题目 
 ---
 ### 目录
 - <a href="#sort">排序</a>
@@ -13,6 +13,7 @@
 - <a href="#maxSum">求数组最大连续子集和</a>
 - <a href="#arrToTree">list转成树结构</a>
 - <a href="#deepCopy">深度拷贝</a>
+- <a href="#flatten">抹平数组</a>
 
 ### <a name="sort">排序</a>
 1.<a name="sort1">冒泡排序</a>
@@ -371,4 +372,24 @@ var copyObj = deepCopy({
     h: undefined
 });
 console.log('copyObj==>', copyObj);
+```
+### <a name="flatten">抹平数组</a>
+```javascript
+// 判断数组
+const isArray = obj => Object.prototype.toString.call(obj) === '[object Array]';
+// 抹平方法
+function flatten(arr, output=[]) {
+    let index = output.length;
+    for(let i=0; i<arr.length; i++) {
+        let value = arr[i];
+        if(isArray(value)) {
+            flatten(value, output)
+        }else {
+            output[index++] = value
+        }
+    }
+    return output
+}
+let newArr = flatten([1,[2,[3,[4,[5]]]]]);
+console.log('newArr==>', newArr)
 ```
