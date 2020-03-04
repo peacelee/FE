@@ -3,6 +3,7 @@ ECMAScript
 ### 目录
 - <a href="#new">new操作符实现</a>
 - <a href="#promise">Promise实现</a>
+- <a href="#call&apply">call/apply/bind实现</a>
 
 ### <a name="new">new操作符实现</a>
 ```javascript
@@ -115,4 +116,89 @@ const resolvePromise = (promiseNext, x, resolve, reject) => {
         resolve(x)
     }
 }
+```
+
+### <a name="call&apply">call/apply/bind实现</a>
+```javascript
+// call实现
+Function.prototype.call = function() {
+    // 解析参数
+    let [thisArg, ...args] = [...arguments];
+    // 如果没有指定this，则指向window或者global
+    if(!thisArg) {
+        thisArg = typeof window === 'undefined' ? global : window
+    }
+    // 挂载方法
+    thisArg.func = this;
+    // 调用
+    let result = thisArg.func(...args);
+    // 删除临时方法
+    delete thisArg.func;
+
+    return result
+}
+
+const objC = {
+    h: 'hello'
+}
+
+function print(w) {
+    console.log(this.h + ' ' + w)
+}
+
+print.call(objC, 'world')
+
+// apply实现
+Function.prototype.apply = function(thisArg, rest) {
+    // 返回结果
+    let result;
+    // 如果没有指定this，则指向window或者global
+    if(!thisArg) {
+        thisArg = typeof window === 'undefined' ? global : window
+    }
+    // 挂载方法
+    thisArg.func = this;
+
+    // 调用
+    if(!rest) {
+        result = thisArg.func();
+    }else {
+        result = thisArg.func(...rest);
+    }
+
+    // 删除临时方法
+    delete thisArg.func;
+
+    return result
+}
+
+const objA = {
+    h: 'hello'
+}
+
+function print(w, q) {
+    console.log(this.h + ' ' + w + q)
+}
+
+print.apply(objA, ['world', '!'])
+
+// bind实现
+Function.prototype.bind = function() {
+    let fn = this;
+    let [thisArg, ...args] = [...arguments]
+    return function() {
+        fn.apply(thisArg, [...args].concat([...arguments]))
+    }
+}
+
+const objB = {
+    h: 'hello'
+}
+
+function print(w, q) {
+    console.log(this.h + ' ' + w + q)
+}
+
+let printFn = print.bind(objB, 'world');
+printFn('!')
 ```

@@ -22,6 +22,7 @@
 #### 原生实现
 - <a href="https://github.com/peacelee/FE/issues/9">new操作符实现</a>
 - <a href="https://github.com/peacelee/FE/issues/10">Promise实现</a>
+- <a href="https://github.com/peacelee/FE/issues/13">call/apply/bind实现</a>
     
 
 
