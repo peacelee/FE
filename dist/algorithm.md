@@ -14,6 +14,8 @@
 - <a href="#arrToTree">list转成树结构</a>
 - <a href="#deepCopy">深度拷贝</a>
 - <a href="#flatten">抹平数组</a>
+- <a href="#add">大整数加法</a>
+- <a href="#Decimal2Binary">十进制转二进制</a>
 
 ### <a name="sort">排序</a>
 1.<a name="sort1">冒泡排序</a>
@@ -332,7 +334,8 @@ console.log('newList==>', newList);
 ```
 ### <a name="deepCopy">深度拷贝</a>
 ```javascript
-function deepCopy (obj, cache = []) {
+// 深度拷贝1
+function deepCopy1(obj, cache = []) {
     // just return if obj is immutable value
     if (obj === null || typeof obj !== 'object') {
         return obj
@@ -359,19 +362,23 @@ function deepCopy (obj, cache = []) {
     return copy
 }
 
-var copyObj = deepCopy({
-    a: 1,
-    b: function() {
-      
-    },
-    c: {name: 1},
-    d: null,
-    e: [1,2,3],
-    f: true,
-    g: 'abc',
-    h: undefined
-});
-console.log('copyObj==>', copyObj);
+// 深度拷贝2
+function deepCopy2(oldObj, newObj = {}) {
+    for(let i in oldObj) {
+        let item = oldObj[i];
+        let type = Object.prototype.toString.call(item);
+        if(type === '[object Array]') { // 数组
+            newObj[i] = [];
+            deepCopy(item, newObj[i])
+        }else if(type === '[object Object]') { //
+            newObj[i] = {};
+            deepCopy(item, newObj[i])
+        }else {
+            newObj[i] = item
+        }
+    }
+    return newObj
+}
 ```
 ### <a name="flatten">抹平数组</a>
 ```javascript
@@ -392,4 +399,58 @@ function flatten(arr, output=[]) {
 }
 let newArr = flatten([1,[2,[3,[4,[5]]]]]);
 console.log('newArr==>', newArr)
+```
+### <a name="add">大整数加法</a>
+```javascript
+function add(a, b) {
+    let i = a.length - 1;
+    let j = b.length -1;
+    
+    let carry = 0;
+    let result = '';
+
+    while(i>=0 || j>=0) {
+        let x = 0;
+        let y = 0;
+        let sum;
+        if(a[i]) {
+            x = a[i] - 0;
+            i--
+        }
+        if(b[j]) {
+            y = b[j] - 0;
+            j--
+        }
+        sum = x + y + carry;
+
+        if(sum >=10) {
+            carry = 1;
+            sum -= 10
+        }else {
+            carry = 0
+        }
+
+        result = sum + result
+    }
+    if(carry) {
+        result = carry + result
+    }
+    return result
+}
+
+add('99', '1')
+```
+
+### <a name="Decimal2Binary">十进制转二进制</a>
+```javascript
+function decimal2Binary(dec) {
+    let binaryItems = [];
+    while(dec>0) {
+        binaryItems.push(dec%2);
+        dec = Math.floor(dec/2)
+    }
+    return binaryItems.reverse().join('')
+}
+
+decimal2Binary(10)
 ```

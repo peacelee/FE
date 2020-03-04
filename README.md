@@ -16,6 +16,8 @@
 - <a href="https://github.com/peacelee/FE/issues/2">list转成树结构</a>
 - <a href="https://github.com/peacelee/FE/issues/1">深度拷贝</a>
 - <a href="https://github.com/peacelee/FE/issues/8">抹平数组</a>
+- <a href="https://github.com/peacelee/FE/issues/11">大整数加法</a>
+- <a href="https://github.com/peacelee/FE/issues/12">十进制转二进制</a>
 
 #### 原生实现
 - <a href="https://github.com/peacelee/FE/issues/9">new操作符实现</a>
