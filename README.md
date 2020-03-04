@@ -7,7 +7,7 @@
 
 #### 浏览器
 
-#### 题目
+#### 算法
 - <a href="https://github.com/peacelee/FE/issues/7">排序</a>
 - <a href="https://github.com/peacelee/FE/issues/6">二叉树</a>
 - <a href="https://github.com/peacelee/FE/issues/5">深度优先遍历</a>
