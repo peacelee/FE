@@ -25,6 +25,6 @@
 - <a href="https://github.com/peacelee/FE/issues/13">call/apply/bind实现</a>
 
 #### 技术文章
-- <a href="https://github.com/peacelee/FE/dist/djtaro.md">new操作符实现</a>
+- <a href="https://github.com/peacelee/FE/dist/djtaro.md">手拉手实现一套多端业务解决方案</a>
 
 
